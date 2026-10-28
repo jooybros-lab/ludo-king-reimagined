@@ -66,7 +66,7 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--lobby-deep)_95%)] opacity-90" />
       <div className="game-frame relative mx-auto flex h-screen w-full max-w-[min(100vw,56.25vh)] flex-col overflow-hidden">
       <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: `url(${pattern})`, backgroundSize: "260px" }} />
-      <div className="absolute inset-0 bg-lobby-royal/40" />
+      <div className="absolute inset-0 bg-lobby-royal/60" />
       <div className="lobby-rays absolute left-1/2 top-1/2 h-[220vmax] w-[220vmax] -translate-x-1/2 -translate-y-1/2" />
       <Sparkles />
 
