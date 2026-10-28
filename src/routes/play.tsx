@@ -7,11 +7,11 @@ type Search = { mode: "computer" | "local"; players: number; color: Color; diff:
 
 export const Route = createFileRoute("/play")({
   validateSearch: (s: Record<string, unknown>): Search => {
-    const players = [2, 3, 4].includes(Number(s.players)) ? Number(s.players) : 4;
-    const color = COLORS.includes(s.color as Color) ? (s.color as Color) : "red";
-    const diff = ["easy", "normal", "hard"].includes(String(s.diff)) ? (s.diff as Difficulty) : "normal";
-    const names = Array.isArray(s.names) ? s.names.map((n) => String(n).slice(0, 14)) : [];
-    return { mode: s.mode === "local" ? "local" : "computer", players, color, diff, names };
+    const players = [2, 3, 4].includes(Number(s["players"])) ? Number(s["players"]) : 4;
+    const color = COLORS.includes(s["color"] as Color) ? (s["color"] as Color) : "red";
+    const diff = ["easy", "normal", "hard"].includes(String(s["diff"])) ? (s["diff"] as Difficulty) : "normal";
+    const names = Array.isArray(s["names"]) ? s["names"].map((n) => String(n).slice(0, 14)) : [];
+    return { mode: s["mode"] === "local" ? "local" : "computer", players, color, diff, names };
   },
   head: () => ({
     meta: [
