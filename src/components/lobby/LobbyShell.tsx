@@ -102,9 +102,9 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
           <DialogHeader><DialogTitle className="font-display text-2xl">Settings</DialogTitle><DialogDescription>Sound, music and how to play.</DialogDescription></DialogHeader>
           <div className="space-y-5">
             <label className="block space-y-2"><span className="font-bold">Lobby music</span>
-              <Slider value={[s.music * 100]} onValueChange={([v]) => updateSettings({ music: v / 100 })} /></label>
+              <Slider value={[s.music * 100]} onValueChange={([v]) => updateSettings({ music: (v ?? 0) / 100 })} /></label>
             <label className="block space-y-2"><span className="font-bold">Sound effects</span>
-              <Slider value={[s.sfx * 100]} onValueChange={([v]) => updateSettings({ sfx: v / 100 })} /></label>
+              <Slider value={[s.sfx * 100]} onValueChange={([v]) => updateSettings({ sfx: (v ?? 0) / 100 })} /></label>
             <div className="flex items-center justify-between"><span className="font-bold">Mute all</span><Switch checked={s.muted} onCheckedChange={(v) => updateSettings({ muted: v })} /></div>
             <div className="flex items-center justify-between"><span className="font-bold">Vibration</span><Switch checked={s.haptics} onCheckedChange={(v) => updateSettings({ haptics: v })} /></div>
             <div className="rounded-lg bg-muted p-3 text-sm text-muted-foreground">

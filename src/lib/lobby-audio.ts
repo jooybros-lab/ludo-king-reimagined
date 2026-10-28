@@ -69,9 +69,9 @@ export function startMusic() {
   let next = c.currentTime + 0.05;
   timer = setInterval(() => {
     while (next < c.currentTime + 0.3) {
-      const m = melody[step % 16];
-      if (m >= 0) marimba(N[m], next, 0.25, musicGain!);
-      if (step % 4 === 0) marimba(bass[Math.floor(step / 16) % 4], next, 0.4, musicGain!);
+      const m = melody[step % 16] ?? -1;
+      if (m >= 0) marimba(N[m] ?? 523.25, next, 0.25, musicGain!);
+      if (step % 4 === 0) marimba(bass[Math.floor(step / 16) % 4] ?? 130.81, next, 0.4, musicGain!);
       if (step % 2 === 1) tick(next, 0.08, musicGain!);
       step++; next += spb;
     }
