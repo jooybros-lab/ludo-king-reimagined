@@ -22,7 +22,7 @@ export function SetupPanel({ mode }: { mode: "computer" | "local" }) {
   const [names, setNames] = useState(["Player 1", "Player 2", "Player 3", "Player 4"]);
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-100px)] max-w-lg items-center px-4 pb-10">
+    <div className="flex flex-1 items-center overflow-y-auto px-3 pb-6">
       <div className="animate-pop w-full rounded-3xl border-4 border-gold bg-lobby-deep/80 p-6 shadow-2xl backdrop-blur">
         <h1 className="mb-6 text-center font-display text-4xl text-gold text-stroke">
           {mode === "computer" ? "Play vs Computer" : "Pass N Play"}

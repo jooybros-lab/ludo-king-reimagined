@@ -209,3 +209,5 @@
 .icon-btn { background: linear-gradient(180deg, var(--gold), var(--gold-deep)); box-shadow: 0 4px 0 oklch(0.4 0.1 60); transition: transform .1s; }
 .icon-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 oklch(0.4 0.1 60); }
 .text-stroke { -webkit-text-stroke: 1.5px oklch(0.25 0.1 265); paint-order: stroke fill; text-shadow: 0 3px 0 oklch(0 0 0 / .35); }
+.game-frame { border-left: 3px solid oklch(0.15 0.05 265); border-right: 3px solid oklch(0.15 0.05 265); box-shadow: 0 0 60px 10px oklch(0.5 0.22 262 / .7); }
+@keyframes load { from { width: 0 } to { width: 100% } }

@@ -7,6 +7,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
+import pattern from "@/assets/ludo-pattern.jpg";
 import { loadSettings, getSettings, subscribe, updateSettings, startMusic, playClick } from "@/lib/lobby-audio";
 
 function useLobbySettings() {
@@ -59,12 +60,18 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
   };
 
   return (
-    <div className="lobby-bg relative min-h-screen overflow-hidden text-primary-foreground">
+    <div className="lobby-bg relative h-screen overflow-hidden text-primary-foreground">
+      {/* Dimmed, blurred board pattern behind the phone-shaped game column (as on the original site) */}
+      <div className="absolute inset-0 scale-110 bg-repeat opacity-40 blur-[3px]" style={{ backgroundImage: `url(${pattern})`, backgroundSize: "420px" }} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,var(--lobby-deep)_95%)] opacity-90" />
+      <div className="game-frame relative mx-auto flex h-screen w-full max-w-[min(100vw,56.25vh)] flex-col overflow-hidden">
+      <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: `url(${pattern})`, backgroundSize: "260px" }} />
+      <div className="absolute inset-0 bg-lobby-royal/60" />
       <div className="lobby-rays absolute left-1/2 top-1/2 h-[220vmax] w-[220vmax] -translate-x-1/2 -translate-y-1/2" />
       <Sparkles />
 
-      <header className="relative z-10 flex flex-wrap items-center justify-between gap-3 p-3 sm:p-5">
-        <div className="flex items-center gap-3">
+      <header className="relative z-10 flex items-start justify-between gap-2 p-3">
+        <div className="flex flex-wrap items-center gap-2">
           {showHome && (
             <Link to="/" onClick={playClick} aria-label="Home" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep"><Home className="h-6 w-6" /></Link>
           )}
@@ -83,19 +90,20 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
             <span className="min-w-14 font-display text-lg">{coins.toLocaleString()}</span>
             <button onClick={addBonus} aria-label="Bonus coins" className="grid h-7 w-7 place-items-center rounded-full bg-bonus"><Plus className="h-4 w-4" /></button>
           </div>
-          <div className="pill hidden items-center gap-2 rounded-full py-1 pl-1 pr-4 sm:flex">
+          <div className="pill flex items-center gap-2 rounded-full py-1 pl-1 pr-4">
             <span className="h-7 w-7 rotate-45 rounded-sm border-2 border-gold bg-gem" />
             <span className="font-display text-lg">25</span>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2">
           <button onClick={toggleFs} aria-label="Full screen" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep">{fs ? <Minimize /> : <Maximize />}</button>
           <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep">{s.muted ? <VolumeX /> : <Volume2 />}</button>
           <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep"><Settings /></button>
         </div>
       </header>
 
-      <main className="relative z-10">{children}</main>
+      <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+      </div>
 
       <Dialog open={openSettings} onOpenChange={setOpenSettings}>
         <DialogContent>
