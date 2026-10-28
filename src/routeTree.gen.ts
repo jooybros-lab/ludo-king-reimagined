@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PassAndPlayRouteImport } from './routes/pass-and-play'
+import { Route as PlayRouteImport } from './routes/play'
 import { Route as VsComputerRouteImport } from './routes/vs-computer'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const PassAndPlayRoute = PassAndPlayRouteImport.update({
   path: '/pass-and-play',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlayRoute = PlayRouteImport.update({
+  id: '/play',
+  path: '/play',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VsComputerRoute = VsComputerRouteImport.update({
   id: '/vs-computer',
   path: '/vs-computer',
@@ -32,30 +38,34 @@ const VsComputerRoute = VsComputerRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/pass-and-play': typeof PassAndPlayRoute
+  '/play': typeof PlayRoute
   '/vs-computer': typeof VsComputerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/pass-and-play': typeof PassAndPlayRoute
+  '/play': typeof PlayRoute
   '/vs-computer': typeof VsComputerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/pass-and-play': typeof PassAndPlayRoute
+  '/play': typeof PlayRoute
   '/vs-computer': typeof VsComputerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pass-and-play' | '/vs-computer'
+  fullPaths: '/' | '/pass-and-play' | '/play' | '/vs-computer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pass-and-play' | '/vs-computer'
-  id: '__root__' | '/' | '/pass-and-play' | '/vs-computer'
+  to: '/' | '/pass-and-play' | '/play' | '/vs-computer'
+  id: '__root__' | '/' | '/pass-and-play' | '/play' | '/vs-computer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PassAndPlayRoute: typeof PassAndPlayRoute
+  PlayRoute: typeof PlayRoute
   VsComputerRoute: typeof VsComputerRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PassAndPlayRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/play': {
+      id: '/play'
+      path: '/play'
+      fullPath: '/play'
+      preLoaderRoute: typeof PlayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vs-computer': {
       id: '/vs-computer'
       path: '/vs-computer'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PassAndPlayRoute: PassAndPlayRoute,
+  PlayRoute: PlayRoute,
   VsComputerRoute: VsComputerRoute,
 }
 export const routeTree = rootRouteImport

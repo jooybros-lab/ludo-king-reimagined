@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { toast } from "sonner";
+import { useNavigate } from "@tanstack/react-router";
 import { Input } from "@/components/ui/input";
 import { playClick } from "@/lib/lobby-audio";
 
@@ -19,6 +19,7 @@ export function SetupPanel({ mode }: { mode: "computer" | "local" }) {
   const [players, setPlayers] = useState(mode === "computer" ? 2 : 2);
   const [color, setColor] = useState<string>("red");
   const [diff, setDiff] = useState("Normal");
+  const navigate = useNavigate();
   const [names, setNames] = useState(["Player 1", "Player 2", "Player 3", "Player 4"]);
 
   return (
@@ -57,7 +58,7 @@ export function SetupPanel({ mode }: { mode: "computer" | "local" }) {
             ))}
           </section>
         )}
-        <button onClick={() => { playClick(); toast.success("Game settings ready!"); }}
+        <button onClick={() => { playClick(); navigate({ to: "/play", search: { mode, players, color: color as "red", diff: diff.toLowerCase() as "normal", names: names.slice(0, players) } }); }}
           className="mode-card mode-warm sheen relative w-full overflow-hidden rounded-2xl py-3 font-display text-3xl text-stroke">Play</button>
       </div>
     </div>
