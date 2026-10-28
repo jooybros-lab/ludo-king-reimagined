@@ -203,7 +203,7 @@ export function LudoGame({ config }: { config: GameConfig }) {
 
       <div className="game-status flex items-center gap-3 bg-card p-3">
         <div className="min-w-0">
-          <div className={`text-sm font-bold uppercase lg-text-${color}`}>{nameOf(color)}'s turn</div>
+          <div className={`text-sm font-bold uppercase lg-text-${color}`}>{nameOf(color) === "You" ? "Your" : nameOf(color) + "'s"} turn</div>
           <div className="break-words text-sm text-muted-foreground sm:text-base" aria-live="polite">{winner ? `${nameOf(winner)} won! 🎉` : msg}</div>
         </div>
       </div>
