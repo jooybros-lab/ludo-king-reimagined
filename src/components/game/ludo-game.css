@@ -14,35 +14,17 @@
 .ludo-game .lg-bg-card { background: var(--card); } .ludo-game .bg-board { background: var(--board); }
 .ludo-game .lg-inactive { filter: grayscale(0.85) brightness(0.9); }
 .game-layout {
-  --game-width: min(560px, calc(100vw - 24px));
-  min-height: 100svh;
+  /* Always a single phone-style column (like the original), sized to fit the lobby frame's height */
+  --game-width: min(100%, calc(100svh - 230px));
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  gap: 8px;
+  padding: 8px;
 }
 .game-header, .game-arena, .game-status { width: var(--game-width); max-width: 100%; }
 .game-layout button { touch-action: manipulation; }
-@media (orientation: portrait) and (min-height: 600px) {
-  .game-layout { --game-width: min(560px, calc(100vw - 24px), calc(100svh - 280px)); }
-}
-@media (orientation: landscape) and (max-height: 650px) {
-  .game-layout {
-    --game-width: min(560px, calc(100svh - 156px), calc(100vw - 280px));
-    display: grid;
-    grid-template-columns: var(--game-width) minmax(0, 240px);
-    grid-template-rows: auto 1fr;
-    justify-content: center;
-    align-items: start;
-    column-gap: 16px;
-  }
-  .game-arena { grid-column: 1; grid-row: 1 / 3; }
-  .game-header { grid-column: 2; grid-row: 1; width: 100%; }
-  .game-header h1 { font-size: 20px; }
-  .game-header { grid-template-columns: minmax(0, 1fr); }
-  .game-status { grid-column: 2; grid-row: 2; width: 100%; align-self: center; }
-}
 @media (prefers-reduced-motion: reduce) {
   .token { transition: none; }
   .token-active, .animate-dice, .animate-pulse-ring { animation: none; }
@@ -116,3 +98,4 @@
 @media (prefers-reduced-motion: reduce) {
   .token.token-active, .animate-dice { animation: none; }
 }
+.player-identity { min-width: 0; } .player-identity strong, .player-identity span { display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

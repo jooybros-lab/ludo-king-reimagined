@@ -39,8 +39,8 @@ function PlayPage() {
     config = { active: activeColors(s.players, s.color), humans: [s.color], difficulty: s.diff, names: { [s.color]: "You" } };
   }
   return (
-    <LobbyShell>
-      <div className="flex-1 overflow-y-auto">
+    <LobbyShell bare>
+      <div className="min-h-0 flex-1 overflow-y-auto">
         <LudoGame key={JSON.stringify(s)} config={config} />
       </div>
     </LobbyShell>
