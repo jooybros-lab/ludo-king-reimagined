@@ -96,3 +96,11 @@ function ModeCard({ to, label, delay, icon }: {
     </div>
   );
 }
+
+function Phone({ vs = false }: { vs?: boolean }) {
+  return (
+    <span className={`grid place-items-center rounded-md border-2 border-gold bg-gradient-to-b from-gold to-ludo-yellow shadow-lg ${vs ? "h-14 w-10" : "h-10 w-7"}`}>
+      {vs && <span className="font-display text-lg text-primary-foreground text-stroke">VS</span>}
+    </span>
+  );
+}
