@@ -67,13 +67,16 @@ function Logo({ board = false }: { board?: boolean }) {
         ))}
       </div>
       {board && (
-        <div className="relative mx-auto -mt-1 h-16 w-52">
-          <div className="absolute inset-x-6 bottom-1 top-3 grid grid-cols-2 grid-rows-2 overflow-hidden rounded-md border-2 border-primary-foreground shadow-xl" style={{ transform: "perspective(200px) rotateX(35deg)" }}>
-            <span className="bg-ludo-red" /><span className="bg-ludo-green" /><span className="bg-ludo-blue" /><span className="bg-ludo-yellow" />
+        <div className="relative mx-auto -mt-2 h-24 w-64">
+          <div className="absolute inset-x-10 bottom-2 top-6 grid grid-cols-3 grid-rows-2 overflow-hidden rounded-md border-2 border-primary-foreground bg-primary-foreground shadow-xl" style={{ transform: "perspective(220px) rotateX(40deg)" }}>
+            <span className="bg-ludo-red" /><span className="bg-primary-foreground" /><span className="bg-ludo-green" />
+            <span className="bg-ludo-blue" /><span className="bg-primary-foreground" /><span className="bg-ludo-yellow" />
           </div>
-          <span className="absolute left-1/2 top-0 -translate-x-1/2 text-4xl drop-shadow-lg">🎲</span>
-          <span className="absolute bottom-0 left-0 h-11 w-7 rounded-t-full bg-ludo-blue shadow-lg" />
-          <span className="absolute bottom-0 right-0 h-14 w-9 rounded-t-full bg-ludo-yellow shadow-lg" />
+          <span className="absolute left-1/2 top-1 -translate-x-1/2 text-5xl drop-shadow-lg">🎲</span>
+          <Pawn c="bg-ludo-red" cls="left-10 top-0 scale-75" />
+          <Pawn c="bg-ludo-green" cls="right-10 top-0 scale-75" />
+          <Pawn c="bg-ludo-blue" cls="left-0 bottom-0" />
+          <Pawn c="bg-ludo-yellow" cls="right-0 bottom-0" />
           <span className="absolute -right-6 bottom-0 font-display text-sm text-gold">TM</span>
         </div>
       )}
