@@ -87,21 +87,21 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
             </span>
           </div>
         </div>
-        <div className="mt-2 flex items-start justify-between">
-          <div className="flex flex-col gap-2 pl-1 pt-4">
+        <div className="mt-3 flex items-center justify-between">
+          <div className="flex flex-row gap-2 pl-1">
             {showHome && (
               <Link to="/" onClick={playClick} aria-label="Home" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold"><Home className="h-6 w-6" /></Link>
             )}
             <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)]"><Settings className="h-7 w-7" /></button>
             <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{s.muted ? <VolumeX /> : <Volume2 />}</button>
           </div>
-          <button onClick={addBonus} className="rounded-2xl border-[3px] border-gold bg-lobby-deep px-3 py-2 font-display text-lg text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+          <button onClick={addBonus} className="rounded-2xl border-[3px] border-gold bg-lobby-deep whitespace-nowrap px-2.5 py-1.5 font-display text-base text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
             <Plus className="mr-1 inline h-4 w-4" />MORE COINS
           </button>
         </div>
       </header>
 
-      <main className="relative z-10 -mt-4 flex flex-1 flex-col">{children}</main>
+      <main className="relative z-10 mt-2 flex min-h-0 flex-1 flex-col">{children}</main>
 
       <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>
       </div>
