@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Monitor, Users } from "lucide-react";
 import { LobbyShell } from "@/components/lobby/LobbyShell";
 import { playClick } from "@/lib/lobby-audio";
+import logoAsset from "@/assets/ludo-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,7 +38,7 @@ function Index() {
         </div>
       ) : (
         <div className="flex min-h-0 flex-1 flex-col items-center justify-evenly gap-[1.5dvh] px-6 pb-16">
-          <div className="animate-pop origin-top scale-[min(1,calc(100dvh/760px))] pt-6"><Logo board /></div>
+          <img src={logoAsset.url} alt="Ludo King" className="animate-pop mt-6 w-[min(20rem,80vw,40dvh)] drop-shadow-xl" />
           <div className="flex w-full flex-col items-center gap-[2.5dvh]">
             <ModeCard to="/pass-and-play" label={["چند نفره", "روی یک گوشی"]} delay="0s" icon={
               <div className="flex items-center gap-1">
