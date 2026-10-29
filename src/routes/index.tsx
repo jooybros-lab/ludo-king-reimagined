@@ -36,9 +36,9 @@ function Index() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-1 flex-col items-center justify-start gap-5 px-6 pb-20">
-          <div className="animate-pop"><Logo board /></div>
-          <div className="flex w-full flex-col items-center gap-7">
+        <div className="flex min-h-0 flex-1 flex-col items-center justify-evenly gap-[1.5dvh] px-6 pb-16">
+          <div className="animate-pop origin-top scale-[min(1,calc(100dvh/760px))] pt-6"><Logo board /></div>
+          <div className="flex w-full flex-col items-center gap-[2.5dvh]">
             <ModeCard to="/pass-and-play" label={["PASS N", "PLAY"]} delay="0s" icon={<Users className="h-9 w-9 text-gold" strokeWidth={2.4} />} />
             <ModeCard to="/vs-computer" label={["COMPUTER"]} delay="-1.6s" icon={<span className="grid h-12 w-10 place-items-center rounded-md border-2 border-gold bg-gold/80 font-display text-lg text-lobby-deep">VS</span>} />
           </div>
@@ -83,9 +83,9 @@ function ModeCard({ to, label, delay, icon }: {
   return (
     <div className="animate-bob" style={{ animationDelay: delay }}>
       <Link to={to} onClick={playClick}
-        className="sheen relative flex h-36 w-44 flex-col overflow-hidden rounded-3xl border-4 border-gold bg-gold shadow-[0_0_24px_var(--gold)] transition-transform hover:scale-105 active:scale-95">
+        className="sheen relative flex h-[min(9rem,19dvh)] w-[min(11rem,23dvh)] flex-col overflow-hidden rounded-3xl border-4 border-gold bg-gold shadow-[0_0_24px_var(--gold)] transition-transform hover:scale-105 active:scale-95">
         <div className="m-1.5 mb-0 grid flex-1 place-items-center rounded-t-2xl bg-gradient-to-b from-lobby-royal to-lobby-deep">{icon}</div>
-        <div className="grid h-14 place-items-center bg-gold px-1 font-display text-xl leading-tight text-primary-foreground text-stroke">
+        <div className="grid h-[42%] place-items-center bg-gold px-1 font-display text-[min(1.25rem,2.6dvh)] leading-tight text-primary-foreground text-stroke">
           <div>{label.map((l) => <div key={l}>{l}</div>)}</div>
         </div>
       </Link>
