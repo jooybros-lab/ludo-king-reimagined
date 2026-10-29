@@ -95,7 +95,7 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
             <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)]"><Settings className="h-7 w-7" /></button>
             <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{s.muted ? <VolumeX /> : <Volume2 />}</button>
           </div>
-          <button onClick={addBonus} className="rounded-2xl border-[3px] border-gold bg-lobby-deep px-3 py-2 font-display text-lg text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+          <button onClick={addBonus} className="rounded-2xl border-[3px] border-gold bg-lobby-deep whitespace-nowrap px-2.5 py-1.5 font-display text-base text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
             <Plus className="mr-1 inline h-4 w-4" />MORE COINS
           </button>
         </div>
