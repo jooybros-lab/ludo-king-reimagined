@@ -70,39 +70,40 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
       <div className="lobby-rays absolute left-1/2 top-1/2 h-[220vmax] w-[220vmax] -translate-x-1/2 -translate-y-1/2" />
       <Sparkles />
 
-      <header className="relative z-10 flex items-start justify-between gap-2 p-3">
-        <div className="flex flex-wrap items-center gap-2">
-          {showHome && (
-            <Link to="/" onClick={playClick} aria-label="Home" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep"><Home className="h-6 w-6" /></Link>
-          )}
-          <button onClick={() => { playClick(); setOpenProfile(true); }} className="pill flex items-center gap-3 rounded-2xl py-1.5 pl-1.5 pr-4" aria-label="Edit profile">
-            <div className="relative h-12 w-12 rounded-xl border-2 border-gold bg-gradient-to-br from-ludo-yellow to-ludo-red">
-              <span className="absolute inset-0 grid place-items-center font-display text-2xl text-stroke">{name[0]?.toUpperCase()}</span>
-              <span className="absolute -bottom-2 -right-2 grid h-6 w-6 place-items-center rounded-full border-2 border-gold bg-lobby-royal font-display text-xs">1</span>
-            </div>
-            <div className="text-left">
-              <div className="font-display text-lg leading-none">{name}</div>
-              <div className="mt-1 flex items-center gap-1 text-xs font-bold text-gold"><Pencil className="h-3 w-3" /> Level 1</div>
-            </div>
+      {/* Header laid out like the original: avatar+name bar left, coins + MORE COINS right, settings under avatar */}
+      <header className="relative z-10 px-2 pt-2">
+        <div className="flex items-start gap-2">
+          <button onClick={() => { playClick(); setOpenProfile(true); }} aria-label="Edit profile"
+            className="relative h-16 w-16 shrink-0 rounded-lg border-[3px] border-gold bg-gradient-to-br from-muted-foreground/60 to-lobby-deep shadow-lg">
+            <span className="absolute inset-0 grid place-items-center font-display text-3xl text-stroke">{name[0]?.toUpperCase()}</span>
+            <span className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5 rounded-full bg-ludo-red" />
+            <span className="absolute -bottom-3 -left-2 grid h-7 w-7 place-items-center font-display text-sm text-lobby-deep" style={{ clipPath: "polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)", background: "var(--gold)" }}>1</span>
           </button>
-          <div className="pill flex items-center gap-2 rounded-full py-1 pl-1 pr-1">
-            <span className="grid h-8 w-8 place-items-center rounded-full border-2 border-gold-deep bg-gold font-display text-gold-deep">$</span>
-            <span className="min-w-14 font-display text-lg">{coins.toLocaleString()}</span>
-            <button onClick={addBonus} aria-label="Bonus coins" className="grid h-7 w-7 place-items-center rounded-full bg-bonus"><Plus className="h-4 w-4" /></button>
-          </div>
-          <div className="pill flex items-center gap-2 rounded-full py-1 pl-1 pr-4">
-            <span className="h-7 w-7 rotate-45 rounded-sm border-2 border-gold bg-gem" />
-            <span className="font-display text-lg">25</span>
+          <div className="flex flex-1 items-center justify-between rounded-br-3xl border-b-[3px] border-r-[3px] border-gold px-2 py-1">
+            <span className="font-display text-xl text-stroke">{name}</span>
+            <span className="flex items-center gap-1.5 font-display text-xl">
+              <span className="grid h-6 w-6 place-items-center rounded-full border-2 border-gold-deep bg-gold text-xs text-gold-deep">$</span>
+              {coins.toLocaleString()}
+            </span>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <button onClick={toggleFs} aria-label="Full screen" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep">{fs ? <Minimize /> : <Maximize />}</button>
-          <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep">{s.muted ? <VolumeX /> : <Volume2 />}</button>
-          <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="icon-btn grid h-11 w-11 place-items-center rounded-xl text-lobby-deep"><Settings /></button>
+        <div className="mt-2 flex items-start justify-between">
+          <div className="flex flex-col gap-2 pl-1 pt-4">
+            {showHome && (
+              <Link to="/" onClick={playClick} aria-label="Home" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold"><Home className="h-6 w-6" /></Link>
+            )}
+            <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)]"><Settings className="h-7 w-7" /></button>
+            <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{s.muted ? <VolumeX /> : <Volume2 />}</button>
+          </div>
+          <button onClick={addBonus} className="rounded-2xl border-[3px] border-gold bg-lobby-deep px-3 py-2 font-display text-lg text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+            <Plus className="mr-1 inline h-4 w-4" />MORE COINS
+          </button>
         </div>
       </header>
 
-      <main className="relative z-10 flex flex-1 flex-col">{children}</main>
+      <main className="relative z-10 -mt-14 flex flex-1 flex-col">{children}</main>
+
+      <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>
       </div>
 
       <Dialog open={openSettings} onOpenChange={setOpenSettings}>

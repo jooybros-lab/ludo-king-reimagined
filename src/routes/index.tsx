@@ -36,45 +36,58 @@ function Index() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-1 flex-col items-center justify-center gap-6 px-6 pb-16">
-          <div className="animate-pop"><Logo /></div>
-          <div className="flex w-full flex-col items-center gap-8">
-            <ModeCard to="/vs-computer" label="Computer" sub="Play vs Bot" color="mode-cyan" delay="0s" icon={<Monitor className="h-14 w-14" strokeWidth={2.2} />} />
-            <ModeCard to="/pass-and-play" label="Pass N Play" sub="Local Multiplayer" color="mode-warm" delay="-1.6s" icon={<Users className="h-14 w-14" strokeWidth={2.2} />} />
+        <div className="flex flex-1 flex-col items-center justify-start gap-5 px-6 pb-20">
+          <div className="animate-pop"><Logo board /></div>
+          <div className="flex w-full flex-col items-center gap-7">
+            <ModeCard to="/pass-and-play" label={["PASS N", "PLAY"]} delay="0s" icon={<Users className="h-9 w-9 text-gold" strokeWidth={2.4} />} />
+            <ModeCard to="/vs-computer" label={["COMPUTER"]} delay="-1.6s" icon={<span className="grid h-12 w-10 place-items-center rounded-md border-2 border-gold bg-gold/80 font-display text-lg text-lobby-deep">VS</span>} />
           </div>
+          <button onClick={playClick} aria-label="Free coins" className="absolute bottom-4 left-4 grid h-12 w-14 place-items-center rounded-xl bg-ludo-red font-display text-xs text-stroke shadow-lg animate-bob">
+            <Monitor className="h-6 w-6" />FREE
+          </button>
         </div>
       )}
     </LobbyShell>
   );
 }
 
-function Logo() {
-  const letters = [["L", "bg-ludo-blue"], ["U", "bg-ludo-red"], ["D", "bg-ludo-green"], ["O", "bg-ludo-yellow"]];
+function Logo({ board = false }: { board?: boolean }) {
+  const letters = [["L", "text-ludo-blue"], ["U", "text-ludo-red"], ["D", "text-ludo-green"], ["O", "text-ludo-yellow"]];
   return (
     <div className="relative text-center">
-      <div className="text-5xl">👑</div>
-      <div className="flex gap-1.5">
+      <div className="absolute -left-4 -top-8 -rotate-12 text-5xl drop-shadow-lg">👑</div>
+      <div className="absolute -right-1 -top-5 font-display text-xl text-gold text-stroke">KING</div>
+      <div className="flex gap-1">
         {letters.map(([l, c]) => (
-          <span key={l} className={`grid h-16 w-16 place-items-center rounded-full border-4 border-primary-foreground ${c} font-display text-4xl text-stroke shadow-lg`}>{l}</span>
+          <span key={l} className={`grid h-14 w-14 place-items-center rounded-full border-4 border-gold bg-primary-foreground ${c} font-display text-4xl shadow-lg`}>{l}</span>
         ))}
       </div>
-      <div className="absolute -right-2 top-6 font-display text-2xl text-gold text-stroke">KING</div>
+      {board && (
+        <div className="relative mx-auto -mt-1 h-20 w-64">
+          <div className="absolute inset-x-6 bottom-1 top-3 grid grid-cols-2 grid-rows-2 overflow-hidden rounded-md border-2 border-primary-foreground shadow-xl" style={{ transform: "perspective(200px) rotateX(35deg)" }}>
+            <span className="bg-ludo-red" /><span className="bg-ludo-green" /><span className="bg-ludo-blue" /><span className="bg-ludo-yellow" />
+          </div>
+          <span className="absolute left-1/2 top-0 -translate-x-1/2 text-4xl drop-shadow-lg">🎲</span>
+          <span className="absolute bottom-0 left-0 h-14 w-9 rounded-t-full bg-ludo-blue shadow-lg" />
+          <span className="absolute bottom-0 right-0 h-14 w-9 rounded-t-full bg-ludo-yellow shadow-lg" />
+          <span className="absolute -right-6 bottom-0 font-display text-sm text-gold">TM</span>
+        </div>
+      )}
     </div>
   );
 }
 
-function ModeCard({ to, label, sub, color, delay, icon }: {
-  to: "/vs-computer" | "/pass-and-play"; label: string; sub: string; color: string; delay: string; icon: React.ReactNode;
+function ModeCard({ to, label, delay, icon }: {
+  to: "/vs-computer" | "/pass-and-play"; label: string[]; delay: string; icon: React.ReactNode;
 }) {
   return (
     <div className="animate-bob" style={{ animationDelay: delay }}>
       <Link to={to} onClick={playClick}
-        className={`mode-card sheen ${color} relative flex h-40 w-64 flex-col items-center justify-center gap-1 overflow-hidden rounded-3xl`}>
-        <div className="grid h-20 w-20 place-items-center rounded-full bg-primary-foreground/20 shadow-[0_0_40px_var(--cyan-glow)] drop-shadow-lg">
-          {icon}
+        className="sheen relative flex h-36 w-44 flex-col overflow-hidden rounded-3xl border-4 border-gold bg-gold shadow-[0_0_24px_var(--gold)] transition-transform hover:scale-105 active:scale-95">
+        <div className="m-1.5 mb-0 grid flex-1 place-items-center rounded-t-2xl bg-gradient-to-b from-lobby-royal to-lobby-deep">{icon}</div>
+        <div className="grid h-14 place-items-center bg-gold px-1 font-display text-xl leading-tight text-primary-foreground text-stroke">
+          <div>{label.map((l) => <div key={l}>{l}</div>)}</div>
         </div>
-        <div className="font-display text-3xl text-stroke">{label}</div>
-        <div className="rounded-full bg-lobby-deep/40 px-3 py-0.5 text-sm font-extrabold">{sub}</div>
       </Link>
     </div>
   );
