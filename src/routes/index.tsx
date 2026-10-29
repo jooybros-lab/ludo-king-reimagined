@@ -107,3 +107,12 @@ function Phone({ vs = false }: { vs?: boolean }) {
     </span>
   );
 }
+
+function Pawn({ c, cls }: { c: string; cls: string }) {
+  return (
+    <span className={`absolute flex flex-col items-center drop-shadow-lg ${cls}`}>
+      <span className={`h-6 w-6 rounded-full ${c} ring-1 ring-primary-foreground/50`} />
+      <span className={`-mt-1 h-9 w-10 ${c}`} style={{ clipPath: "polygon(35% 0,65% 0,100% 100%,0 100%)" }} />
+    </span>
+  );
+}
