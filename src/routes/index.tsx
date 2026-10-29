@@ -38,12 +38,16 @@ function Index() {
       ) : (
         <div className="flex min-h-0 flex-1 flex-col items-center justify-evenly gap-[1.5dvh] px-6 pb-16">
           <div className="animate-pop origin-top scale-[min(1,calc(100dvh/760px))] pt-6"><Logo board /></div>
-          <div className="flex w-full flex-col items-center gap-[2dvh]">
-            <ModeCard to="/pass-and-play" label={["دو نفره"]} delay="0s" icon={<Users className="h-9 w-9 text-gold" strokeWidth={2.4} />} />
-            <ModeCard to="/vs-computer" label={["کامپیوتر"]} delay="-1.6s" icon={<span className="grid h-12 w-10 place-items-center rounded-md border-2 border-gold bg-gold/80 font-display text-lg text-lobby-deep">VS</span>} />
+          <div className="flex w-full flex-col items-center gap-[2.5dvh]">
+            <ModeCard to="/pass-and-play" label={["چند نفره", "روی یک گوشی"]} delay="0s" icon={
+              <div className="flex items-center gap-1">
+                <Phone /><span className="h-1 w-3 rounded bg-gold" /><span className="grid h-6 w-6 place-items-center rounded-full bg-ludo-green ring-2 ring-gold"><Users className="h-3.5 w-3.5 text-lobby-deep" /></span><span className="h-1 w-3 rounded bg-gold" /><Phone />
+              </div>} />
+            <ModeCard to="/vs-computer" label={["کامپیوتر"]} delay="-1.6s" icon={<Phone vs />} />
           </div>
-          <button onClick={playClick} aria-label="Free coins" className="absolute bottom-4 left-4 grid h-11 w-12 place-items-center rounded-lg bg-ludo-red font-display text-xs text-stroke shadow-lg animate-bob">
-            <Monitor className="h-5 w-5" />رایگان
+          <button onClick={playClick} aria-label="Free coins" className="absolute bottom-3 left-3 flex flex-col items-center animate-bob">
+            <span className="grid h-9 w-12 place-items-center rounded-xl border-2 border-gold bg-ludo-red shadow-[0_0_18px_var(--gold)]"><Monitor className="h-5 w-5" /></span>
+            <span className="-mt-1 rounded-full bg-gold px-2 text-[10px] font-bold text-lobby-deep">سکه رایگان</span>
           </button>
         </div>
       )}
@@ -83,9 +87,9 @@ function ModeCard({ to, label, delay, icon }: {
   return (
     <div className="animate-bob" style={{ animationDelay: delay }}>
       <Link to={to} onClick={playClick}
-        className="sheen relative flex h-[min(7.5rem,17dvh)] w-[min(9.5rem,21dvh)] flex-col overflow-hidden rounded-3xl border-4 border-gold bg-gold shadow-[0_0_24px_var(--gold)] transition-transform hover:scale-105 active:scale-95">
-        <div className="m-1.5 mb-0 grid flex-1 place-items-center rounded-t-2xl bg-gradient-to-b from-lobby-royal to-lobby-deep">{icon}</div>
-        <div className="grid h-[42%] place-items-center bg-gold px-1 font-display text-[min(1.25rem,2.6dvh)] leading-tight text-primary-foreground text-stroke">
+        className="sheen relative flex h-[min(10rem,20dvh)] w-[min(12rem,25dvh)] flex-col overflow-hidden rounded-[1.75rem] border-4 border-gold bg-gold shadow-[0_0_24px_var(--gold)] transition-transform hover:scale-105 active:scale-95">
+        <div className="m-2 mb-0 grid flex-1 place-items-center rounded-t-2xl border-b-4 border-lobby-deep bg-gradient-to-b from-ludo-blue to-lobby-royal">{icon}</div>
+        <div className="grid h-[40%] place-items-center bg-gold px-1 font-display text-[min(1.3rem,2.7dvh)] leading-tight text-primary-foreground text-stroke">
           <div>{label.map((l) => <div key={l}>{l}</div>)}</div>
         </div>
       </Link>
