@@ -44,7 +44,7 @@ export function PlayerPanel({ color, name, active, human, dice, rolling, disable
         <path d="M21 28 Q24 30 27 28" className="avatar-smile" />
       </svg>
     </div>
-    <div className="player-identity"><strong>{name}</strong><span>{human ? "You" : "Computer"} · {finished}/4</span></div>
+    <div className="player-identity"><strong>{name}</strong><span>{human ? "شما" : "کامپیوتر"} · {finished}/4</span></div>
     <Button variant="outline" className={`player-dice ${active ? "dice-current" : ""} ${active && rolling ? "animate-dice" : ""}`}
       disabled={disabled} onClick={onRoll} aria-label={human ? "Roll dice" : `${name}'s dice`}>
       <DiceFace value={active ? dice ?? 6 : 6} />

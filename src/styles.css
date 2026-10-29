@@ -172,8 +172,8 @@
   --color-ludo-green: var(--ludo-green);
   --color-ludo-yellow: var(--ludo-yellow);
   --color-ludo-blue: var(--ludo-blue);
-  --font-display: "Lilita One", system-ui, sans-serif;
-  --font-body: "Nunito", system-ui, sans-serif;
+  --font-display: "Lilita One", "Vazirmatn", system-ui, sans-serif;
+  --font-body: "Nunito", "Vazirmatn", system-ui, sans-serif;
 }
 .lobby-bg {
   background: radial-gradient(ellipse at 50% 45%, var(--lobby-royal), var(--lobby-deep) 70%);
