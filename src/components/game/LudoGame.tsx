@@ -150,14 +150,19 @@ export function LudoGame({ config }: { config: GameConfig }) {
       <header className="game-header grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
         <h1 className="min-w-0 font-display text-2xl text-gold text-stroke">لودو کینگ</h1>
         <div className="flex shrink-0 gap-2">
-          <Button asChild variant="secondary" size="icon" className="h-11 w-11" aria-label="بازگشت به منو" title="Back to menu">
-            <Link to="/"><Home /></Link>
-          </Button>
-          <Button variant="secondary" size="icon" className="h-11 w-11" aria-label={music ? "Turn music off" : "Turn music on"} aria-pressed={music}
-            onClick={() => { setMusic(!music); toggleMusic(!music); }}>
-            {music ? <Music2 /> : <VolumeX />}
-          </Button>
-          <Button variant="secondary" size="icon" className="h-11 w-11" aria-label="New game" title="New game" onClick={restart}><RotateCcw /></Button>
+          <Link to="/" aria-label="بازگشت به منو" title="بازگشت به منو"
+            className="grid h-10 w-10 place-items-center rounded-lg border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+            <Home className="h-5 w-5" />
+          </Link>
+          <button aria-label={music ? "خاموش کردن صدا" : "روشن کردن صدا"} aria-pressed={music}
+            onClick={() => { setMusic(!music); toggleMusic(!music); }}
+            className="grid h-10 w-10 place-items-center rounded-lg border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+            {music ? <Music2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+          </button>
+          <button aria-label="بازی جدید" title="بازی جدید" onClick={restart}
+            className="grid h-10 w-10 place-items-center rounded-lg border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+            <RotateCcw className="h-5 w-5" />
+          </button>
         </div>
       </header>
 
