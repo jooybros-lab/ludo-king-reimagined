@@ -36,7 +36,7 @@ function PlayPage() {
       names: Object.fromEntries(active.map((c, i) => [c, s.names[i]?.trim() || `Player ${i + 1}`])),
     };
   } else {
-    config = { active: activeColors(s.players, s.color), humans: [s.color], difficulty: s.diff, names: { [s.color]: "You" } };
+    config = { active: activeColors(s.players, s.color), humans: [s.color], difficulty: s.diff, names: { [s.color]: "شما" } };
   }
   return (
     <LobbyShell bare>

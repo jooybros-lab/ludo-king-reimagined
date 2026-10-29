@@ -28,7 +28,7 @@ export function activeColors(players: number, first: Color): Color[] {
 export function LudoGame({ config }: { config: GameConfig }) {
   const { active, humans, difficulty } = config;
   const isHuman = (c: Color) => humans.includes(c);
-  const nameOf = (c: Color) => config.names[c] ?? (isHuman(c) ? "You" : `Bot ${c[0]!.toUpperCase()}${c.slice(1)}`);
+  const nameOf = (c: Color) => config.names[c] ?? (isHuman(c) ? "شما" : `ربات ${({red:"قرمز",green:"سبز",yellow:"زرد",blue:"آبی"} as Record<Color,string>)[c]}`);
 
   const [state, setState] = useState<State>(initialState);
   const [turn, setTurn] = useState(0);
@@ -36,7 +36,7 @@ export function LudoGame({ config }: { config: GameConfig }) {
   const [rolling, setRolling] = useState(false);
   const [winner, setWinner] = useState<Color | null>(null);
   const [music, setMusic] = useState(false);
-  const [msg, setMsg] = useState("Tap the dice to roll!");
+  const [msg, setMsg] = useState("برای پرتاب، روی تاس بزنید!");
   const busy = useRef(false);
   const [tick, setTick] = useState(0);
   const [face, setFace] = useState(6);
@@ -57,7 +57,7 @@ export function LudoGame({ config }: { config: GameConfig }) {
   const doMove = (s: State, c: Color, i: number, d: number) => {
     const r = applyMove(s, c, i, d);
     setState(r.state);
-    if (r.captured) { sfx.capture(); setMsg(`${nameOf(c)} captured a token!`); }
+    if (r.captured) { sfx.capture(); setMsg(`${nameOf(c)} یک مهره را زد!`); }
     else if (r.finished) sfx.home();
     else sfx.move();
     if (r.state[c].every((p) => p === FINISH)) { setWinner(c); sfx.win(); return; }
@@ -78,17 +78,17 @@ export function LudoGame({ config }: { config: GameConfig }) {
       if (d === 6) sfx.six();
       const c = color;
       if (d === 6 && ++sixes.current === 3) {
-        setMsg(`${nameOf(c)} rolled three 6s — turn lost`);
+        setMsg(`${nameOf(c)} سه بار ۶ آورد — نوبت سوخت`);
         later(() => nextTurn(false), 900);
         return;
       }
       const movable = state[c].map((p, i) => (canMove(p, d) ? i : -1)).filter((i) => i >= 0);
       if (movable.length === 0) {
-        setMsg(`${nameOf(c)} rolled ${d} — no moves`);
+        setMsg(`${nameOf(c)} ${d} آورد — حرکتی ممکن نیست`);
         later(() => nextTurn(false), 800);
         return;
       }
-      setMsg(`${nameOf(c)} rolled ${d}`);
+      setMsg(`${nameOf(c)} ${d} آورد`);
       if (!isHuman(c)) {
         later(() => doMove(state, c, botChoose(state, c, d, difficulty), d), 600);
       } else if (movable.length === 1) {
@@ -100,7 +100,7 @@ export function LudoGame({ config }: { config: GameConfig }) {
 
   useEffect(() => {
     if (winner) return;
-    if (isHuman(color)) { setMsg(`${nameOf(color)} — tap the dice!`); return; }
+    if (isHuman(color)) { setMsg(`${nameOf(color)} — روی تاس بزنید!`); return; }
     const t = setTimeout(roll, 700);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,9 +148,9 @@ export function LudoGame({ config }: { config: GameConfig }) {
   return (
     <main className="ludo-game game-layout text-foreground">
       <header className="game-header grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-        <h1 className="min-w-0 font-display text-2xl text-gold text-stroke">Ludo King</h1>
+        <h1 className="min-w-0 font-display text-2xl text-gold text-stroke">لودو کینگ</h1>
         <div className="flex shrink-0 gap-2">
-          <Button asChild variant="secondary" size="icon" className="h-11 w-11" aria-label="Back to menu" title="Back to menu">
+          <Button asChild variant="secondary" size="icon" className="h-11 w-11" aria-label="بازگشت به منو" title="Back to menu">
             <Link to="/"><Home /></Link>
           </Button>
           <Button variant="secondary" size="icon" className="h-11 w-11" aria-label={music ? "Turn music off" : "Turn music on"} aria-pressed={music}
@@ -201,20 +201,20 @@ export function LudoGame({ config }: { config: GameConfig }) {
         <div className="player-row">{(["blue", "yellow"] as Color[]).map(panel)}</div>
       </div>
 
-      <div className="game-status flex items-center gap-3 bg-card p-3">
+      <div dir="rtl" className="game-status flex items-center gap-3 bg-card p-3">
         <div className="min-w-0">
-          <div className={`text-sm font-bold uppercase lg-text-${color}`}>{nameOf(color) === "You" ? "Your" : nameOf(color) + "'s"} turn</div>
-          <div className="break-words text-sm text-muted-foreground sm:text-base" aria-live="polite">{winner ? `${nameOf(winner)} won! 🎉` : msg}</div>
+          <div className={`text-sm font-bold uppercase lg-text-${color}`}>نوبت {nameOf(color)}</div>
+          <div className="break-words text-sm text-muted-foreground sm:text-base" aria-live="polite">{winner ? `${nameOf(winner)} برنده شد! 🎉` : msg}</div>
         </div>
       </div>
 
       {winner && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/60">
           <div className="mx-4 max-w-full rounded-lg bg-card p-6 text-center shadow-board">
-            <div className="font-display text-4xl text-primary">{isHuman(winner) && humans.length === 1 ? "You win!" : `${nameOf(winner)} wins`}</div>
+            <div className="font-display text-4xl text-primary">{isHuman(winner) && humans.length === 1 ? "شما بردید!" : `${nameOf(winner)} برنده شد`}</div>
             <div className="mt-6 flex justify-center gap-2">
-              <Button onClick={restart} className="h-11 px-6 font-bold">Play again</Button>
-              <Button asChild variant="secondary" className="h-11 px-6 font-bold"><Link to="/">Menu</Link></Button>
+              <Button onClick={restart} className="h-11 px-6 font-bold">بازی دوباره</Button>
+              <Button asChild variant="secondary" className="h-11 px-6 font-bold"><Link to="/">منو</Link></Button>
             </div>
           </div>
         </div>

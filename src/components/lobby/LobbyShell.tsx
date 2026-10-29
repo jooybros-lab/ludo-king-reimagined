@@ -35,11 +35,11 @@ export function LobbyShell({ children, showHome = false, bare = false }: { child
   const [fs, setFs] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
-  const [name, setName] = useState("Guest");
+  const [name, setName] = useState("مهمان");
   const [coins, setCoins] = useState(2500);
 
   useEffect(() => {
-    setName(localStorage.getItem("ludo-name") || "Guest");
+    setName(localStorage.getItem("ludo-name") || "مهمان");
     setCoins(Number(localStorage.getItem("ludo-coins") || 2500));
     const onFs = () => setFs(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", onFs);
@@ -75,29 +75,29 @@ export function LobbyShell({ children, showHome = false, bare = false }: { child
       <header className="relative z-10 px-2 pt-2">
         <div className="flex items-start gap-2">
           <button onClick={() => { playClick(); setOpenProfile(true); }} aria-label="Edit profile"
-            className="relative h-16 w-16 shrink-0 rounded-lg border-[3px] border-gold bg-gradient-to-br from-muted-foreground/60 to-lobby-deep shadow-lg">
-            <span className="absolute inset-0 grid place-items-center font-display text-3xl text-stroke">{name[0]?.toUpperCase()}</span>
+            className="relative h-12 w-12 shrink-0 rounded-lg border-[3px] border-gold bg-gradient-to-br from-muted-foreground/60 to-lobby-deep shadow-lg">
+            <span className="absolute inset-0 grid place-items-center font-display text-2xl text-stroke">{name[0]?.toUpperCase()}</span>
             <span className="absolute -right-1.5 -top-1.5 h-3.5 w-3.5 rounded-full bg-ludo-red" />
-            <span className="absolute -bottom-3 -left-2 grid h-7 w-7 place-items-center font-display text-sm text-lobby-deep" style={{ clipPath: "polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)", background: "var(--gold)" }}>1</span>
+            <span className="absolute -bottom-3 -left-2 grid h-6 w-6 place-items-center font-display text-xs text-lobby-deep" style={{ clipPath: "polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)", background: "var(--gold)" }}>1</span>
           </button>
-          <div className="flex flex-1 items-center justify-between rounded-br-3xl border-b-[3px] border-r-[3px] border-gold px-2 py-1">
-            <span className="font-display text-xl text-stroke">{name}</span>
-            <span className="flex items-center gap-1.5 font-display text-xl">
+          <div className="flex min-w-0 flex-1 items-center justify-between gap-2 rounded-br-2xl border-b-[3px] border-r-[3px] border-gold px-2 py-1">
+            <span className="truncate font-display text-base text-stroke">{name}</span>
+            <span className="flex shrink-0 items-center gap-1 font-display text-base">
               <span className="grid h-6 w-6 place-items-center rounded-full border-2 border-gold-deep bg-gold text-xs text-gold-deep">$</span>
               {coins.toLocaleString()}
             </span>
           </div>
         </div>
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-2 flex items-center justify-between">
           <div className="flex flex-row gap-2 pl-1">
             {showHome && (
-              <Link to="/" onClick={playClick} aria-label="Home" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold"><Home className="h-6 w-6" /></Link>
+              <Link to="/" onClick={playClick} aria-label="Home" className="grid h-9 w-10 place-items-center rounded-lg border-[3px] border-gold bg-lobby-deep text-gold"><Home className="h-5 w-5" /></Link>
             )}
-            <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)]"><Settings className="h-7 w-7" /></button>
-            <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{s.muted ? <VolumeX /> : <Volume2 />}</button>
+            <button onClick={() => { playClick(); setOpenSettings(true); }} aria-label="Settings" className="grid h-9 w-10 place-items-center rounded-lg border-[3px] border-gold bg-lobby-deep text-gold shadow-[0_0_12px_var(--gold)]"><Settings className="h-5 w-5" /></button>
+            <button onClick={() => { updateSettings({ muted: !s.muted }); startMusic(); playClick(); }} aria-label="Toggle sound" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{s.muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}</button>
           </div>
-          <button onClick={addBonus} className="rounded-2xl border-[3px] border-gold bg-lobby-deep whitespace-nowrap px-2.5 py-1.5 font-display text-base text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
-            <Plus className="mr-1 inline h-4 w-4" />MORE COINS
+          <button onClick={addBonus} className="rounded-xl border-2 border-gold bg-lobby-deep whitespace-nowrap px-2 py-1 font-display text-sm text-gold shadow-[0_0_12px_var(--gold)] active:scale-95">
+            <Plus className="ml-1 inline h-3.5 w-3.5" />سکه بیشتر
           </button>
         </div>
       </header>
@@ -105,21 +105,21 @@ export function LobbyShell({ children, showHome = false, bare = false }: { child
 
       <main className="relative z-10 mt-2 flex min-h-0 flex-1 flex-col">{children}</main>
 
-      {!bare && <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>}
+      {!bare && <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-10 w-10 place-items-center rounded-lg border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>}
       </div>
 
       <Dialog open={openSettings} onOpenChange={setOpenSettings}>
-        <DialogContent>
-          <DialogHeader><DialogTitle className="font-display text-2xl">Settings</DialogTitle><DialogDescription>Sound, music and how to play.</DialogDescription></DialogHeader>
+        <DialogContent dir="rtl">
+          <DialogHeader><DialogTitle className="font-display text-2xl">تنظیمات</DialogTitle><DialogDescription>صدا، موسیقی و راهنمای بازی.</DialogDescription></DialogHeader>
           <div className="space-y-5">
-            <label className="block space-y-2"><span className="font-bold">Lobby music</span>
+            <label className="block space-y-2"><span className="font-bold">موسیقی</span>
               <Slider value={[s.music * 100]} onValueChange={([v]) => updateSettings({ music: (v ?? 0) / 100 })} /></label>
-            <label className="block space-y-2"><span className="font-bold">Sound effects</span>
+            <label className="block space-y-2"><span className="font-bold">جلوه‌های صوتی</span>
               <Slider value={[s.sfx * 100]} onValueChange={([v]) => updateSettings({ sfx: (v ?? 0) / 100 })} /></label>
-            <div className="flex items-center justify-between"><span className="font-bold">Mute all</span><Switch checked={s.muted} onCheckedChange={(v) => updateSettings({ muted: v })} /></div>
-            <div className="flex items-center justify-between"><span className="font-bold">Vibration</span><Switch checked={s.haptics} onCheckedChange={(v) => updateSettings({ haptics: v })} /></div>
+            <div className="flex items-center justify-between"><span className="font-bold">بی‌صدا</span><Switch checked={s.muted} onCheckedChange={(v) => updateSettings({ muted: v })} /></div>
+            <div className="flex items-center justify-between"><span className="font-bold">لرزش</span><Switch checked={s.haptics} onCheckedChange={(v) => updateSettings({ haptics: v })} /></div>
             <div className="rounded-lg bg-muted p-3 text-sm text-muted-foreground">
-              <b className="text-foreground">Rules:</b> Roll a 6 to bring a token out. Move clockwise by the dice value. Landing on an opponent sends it home. Safe squares are marked with a star. First to bring all 4 tokens home wins.
+              <b className="text-foreground">قوانین:</b> با آوردن ۶ مهره وارد بازی می‌شود. مهره‌ها به اندازه عدد تاس در جهت عقربه‌های ساعت حرکت می‌کنند. فرود روی مهره حریف آن را به خانه برمی‌گرداند. خانه‌های ستاره‌دار امن هستند. اولین کسی که هر ۴ مهره را به خانه برساند برنده است.
             </div>
           </div>
         </DialogContent>
@@ -127,8 +127,8 @@ export function LobbyShell({ children, showHome = false, bare = false }: { child
 
       <Dialog open={openProfile} onOpenChange={setOpenProfile}>
         <DialogContent>
-          <DialogHeader><DialogTitle className="font-display text-2xl">Your profile</DialogTitle><DialogDescription>Choose the name other players see.</DialogDescription></DialogHeader>
-          <Input value={name} maxLength={16} onChange={(e) => { setName(e.target.value); localStorage.setItem("ludo-name", e.target.value || "Guest"); }} />
+          <DialogHeader><DialogTitle className="font-display text-2xl">پروفایل شما</DialogTitle><DialogDescription>نامی که دیگران می‌بینند را انتخاب کنید.</DialogDescription></DialogHeader>
+          <Input value={name} maxLength={16} onChange={(e) => { setName(e.target.value); localStorage.setItem("ludo-name", e.target.value || "مهمان"); }} />
         </DialogContent>
       </Dialog>
     </div>
