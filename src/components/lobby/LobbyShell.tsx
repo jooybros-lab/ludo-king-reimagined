@@ -101,7 +101,7 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
         </div>
       </header>
 
-      <main className="relative z-10 -mt-14 flex flex-1 flex-col">{children}</main>
+      <main className="relative z-10 -mt-4 flex flex-1 flex-col">{children}</main>
 
       <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>
       </div>
