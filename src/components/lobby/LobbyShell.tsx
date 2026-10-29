@@ -87,8 +87,8 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
             </span>
           </div>
         </div>
-        <div className="mt-2 flex items-start justify-between">
-          <div className="flex flex-col gap-2 pl-1 pt-4">
+        <div className="mt-3 flex items-center justify-between">
+          <div className="flex flex-row gap-2 pl-1">
             {showHome && (
               <Link to="/" onClick={playClick} aria-label="Home" className="grid h-11 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold"><Home className="h-6 w-6" /></Link>
             )}
@@ -101,7 +101,7 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
         </div>
       </header>
 
-      <main className="relative z-10 -mt-4 flex flex-1 flex-col">{children}</main>
+      <main className="relative z-10 mt-2 flex min-h-0 flex-1 flex-col">{children}</main>
 
       <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>
       </div>
