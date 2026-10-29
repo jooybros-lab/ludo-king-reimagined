@@ -148,7 +148,7 @@ export function LudoGame({ config }: { config: GameConfig }) {
   return (
     <main className="ludo-game game-layout text-foreground">
       <header className="game-header grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-        <h1 className="min-w-0 font-display text-2xl text-gold text-stroke sm:text-3xl">Ludo King</h1>
+        <h1 className="min-w-0 font-display text-2xl text-gold text-stroke">Ludo King</h1>
         <div className="flex shrink-0 gap-2">
           <Button asChild variant="secondary" size="icon" className="h-11 w-11" aria-label="Back to menu" title="Back to menu">
             <Link to="/"><Home /></Link>

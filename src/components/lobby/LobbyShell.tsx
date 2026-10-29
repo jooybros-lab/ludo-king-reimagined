@@ -30,7 +30,7 @@ function Sparkles() {
   );
 }
 
-export function LobbyShell({ children, showHome = false }: { children: ReactNode; showHome?: boolean }) {
+export function LobbyShell({ children, showHome = false, bare = false }: { children: ReactNode; showHome?: boolean; bare?: boolean }) {
   const s = useLobbySettings();
   const [fs, setFs] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
@@ -71,6 +71,7 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
       <Sparkles />
 
       {/* Header laid out like the original: avatar+name bar left, coins + MORE COINS right, settings under avatar */}
+      {!bare && (<>
       <header className="relative z-10 px-2 pt-2">
         <div className="flex items-start gap-2">
           <button onClick={() => { playClick(); setOpenProfile(true); }} aria-label="Edit profile"
@@ -100,10 +101,11 @@ export function LobbyShell({ children, showHome = false }: { children: ReactNode
           </button>
         </div>
       </header>
+      </>)}
 
       <main className="relative z-10 mt-2 flex min-h-0 flex-1 flex-col">{children}</main>
 
-      <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>
+      {!bare && <button onClick={toggleFs} aria-label="Full screen" className="absolute bottom-3 right-3 z-20 grid h-12 w-12 place-items-center rounded-xl border-[3px] border-gold bg-lobby-deep text-gold">{fs ? <Minimize /> : <Maximize />}</button>}
       </div>
 
       <Dialog open={openSettings} onOpenChange={setOpenSettings}>
