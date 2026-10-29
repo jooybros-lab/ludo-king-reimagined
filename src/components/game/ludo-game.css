@@ -98,3 +98,4 @@
 @media (prefers-reduced-motion: reduce) {
   .token.token-active, .animate-dice { animation: none; }
 }
+.player-identity { min-width: 0; } .player-identity strong, .player-identity span { display:block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
